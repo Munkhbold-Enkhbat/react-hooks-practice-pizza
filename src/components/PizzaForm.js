@@ -1,14 +1,26 @@
 import React from "react";
 
-function PizzaForm({ chosenPizza }) {
-  const {id, size, topping, vegetarian} = chosenPizza
+function PizzaForm({ chosenPizza, setChosenPizza }) {
 
-  const handleSubmit = () => {
+  // const [newPizza, setNewPizza] = useState({
+  //   topping: '',
+  //   size: '',
+  //   vegetarian: false
+  // })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const createdPizza = {
+      topping: chosenPizza.topping,
+      size: chosenPizza.size,
+      vegetarian: chosenPizza.vegetarian
+    }
+    console.log("Created pizza:", createdPizza);
 
   }
 
-  const handleSizeSelection = () => {
-    
+  const handleChange = (e) => {
+    setChosenPizza({...chosenPizza, [e.target.name]: e.target.value})
   }
 
   return (
@@ -18,18 +30,20 @@ function PizzaForm({ chosenPizza }) {
           <input
             className="form-control"
             type="text"
-            name={topping}
+            name="topping"
             placeholder="Pizza Topping"
+            value={chosenPizza.topping}
+            onChange={handleChange}
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size" onChange={handleSizeSelection}>
+          <select className="form-control" name="size" onChange={handleChange}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
           </select>
         </div>
-        <div className="col">
+        <div className="col" onChange={handleChange}>
           <div className="form-check">
             <input
               className="form-check-input"

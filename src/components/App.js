@@ -17,16 +17,17 @@ function App() {
       })
   }, [])
 
-  const handleEdit = (e) => {
+  const handleEdit = (e) => {    
     const foundPizza = pizzas.find(pizza => pizza.id == e.target.id)
-    setChosenPizza(foundPizza)
-  }
+    setChosenPizza(foundPizza)    
+  }  
 
+  console.log('chosenPizza:', chosenPizza)
 
   return (
     <>
       <Header />
-      <PizzaForm chosenPizza={chosenPizza}/>
+      <PizzaForm chosenPizza={chosenPizza} setChosenPizza={setChosenPizza}/>
       <PizzaList pizzas={pizzas} handleEdit={handleEdit}/>
     </>
   );
