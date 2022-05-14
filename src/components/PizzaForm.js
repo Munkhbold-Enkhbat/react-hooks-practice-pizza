@@ -2,12 +2,6 @@ import React from "react";
 
 function PizzaForm({ chosenPizza, setChosenPizza }) {
 
-  // const [newPizza, setNewPizza] = useState({
-  //   topping: '',
-  //   size: '',
-  //   vegetarian: false
-  // })
-
   const handleSubmit = (e) => {
     e.preventDefault()
     const createdPizza = {
@@ -20,6 +14,7 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
   }
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setChosenPizza({...chosenPizza, [e.target.name]: e.target.value})
   }
 
@@ -37,19 +32,19 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size" onChange={handleChange}>
+          <select className="form-control" name="size" onChange={handleChange} value={chosenPizza.size}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
           </select>
         </div>
-        <div className="col" onChange={handleChange}>
+        <div className="col" onChange={handleChange} value={chosenPizza.vegetarian}>
           <div className="form-check">
             <input
               className="form-check-input"
               type="radio"
               name="vegetarian"
-              value="Vegetarian"
+              value={chosenPizza.vegetarian}
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
@@ -58,7 +53,7 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
               className="form-check-input"
               type="radio"
               name="vegetarian"
-              value="Not Vegetarian"
+              value={chosenPizza.vegetarian}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>
