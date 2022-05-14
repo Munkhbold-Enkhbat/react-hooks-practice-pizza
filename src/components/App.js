@@ -6,19 +6,28 @@ import PizzaList from "./PizzaList";
 function App() {
 
   const [pizzas, setPizzas] = useState([])
+  const [chosenPizza, setChosenPizza] = useState({})
 
   useEffect(() => {
     fetch("http://localhost:3001/pizzas")
       .then(res => res.json())
-      .then(data => setPizzas(data))
+      .then(data => {
+        console.log(data);
+        setPizzas(data)
+      })
   }, [])
+
+  const handleEdit = (e) => {
+    const foundPizza = pizzas.find(pizza => pizza.id == e.target.id)
+    setChosenPizza(foundPizza)
+  }
 
 
   return (
     <>
       <Header />
-      <PizzaForm />
-      <PizzaList pizzas={pizzas}/>
+      <PizzaForm chosenPizza={chosenPizza}/>
+      <PizzaList pizzas={pizzas} handleEdit={handleEdit}/>
     </>
   );
 }

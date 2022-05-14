@@ -1,19 +1,29 @@
 import React from "react";
 
-function PizzaForm() {
+function PizzaForm({ chosenPizza }) {
+  const {id, size, topping, vegetarian} = chosenPizza
+
+  const handleSubmit = () => {
+
+  }
+
+  const handleSizeSelection = () => {
+    
+  }
+
   return (
-    <form onSubmit={null /*handle that submit*/}>
+    <form onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="col-5">
           <input
             className="form-control"
             type="text"
-            name="topping"
+            name={topping}
             placeholder="Pizza Topping"
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size">
+          <select className="form-control" name="size" onChange={handleSizeSelection}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>

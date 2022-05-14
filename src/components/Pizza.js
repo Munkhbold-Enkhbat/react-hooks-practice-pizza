@@ -1,8 +1,8 @@
 import React from "react";
 
-function Pizza({ pizza }) {
+function Pizza({ pizza, handleEdit }) {
 
-  const { topping, size, vegetarian } = pizza
+  const { id, topping, size, vegetarian } = pizza
 
   return (
     <tr>
@@ -10,7 +10,7 @@ function Pizza({ pizza }) {
       <td>{size}</td>
       <td>{vegetarian}</td>
       <td>
-        <button type="button" className="btn btn-primary">
+        <button type="button" id={id} className="btn btn-primary" onClick={handleEdit}>
           Edit Pizza
         </button>
       </td>
