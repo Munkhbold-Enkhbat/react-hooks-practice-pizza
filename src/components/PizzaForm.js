@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function PizzaForm({ chosenPizza, setChosenPizza }) {
+
+  // const [isCheck, setIsCheck] = useState(chosenPizza.vegetarian)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -14,8 +16,15 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setChosenPizza({...chosenPizza, [e.target.name]: e.target.value})
+  }
+
+  const handleCheck = (e) => {
+    console.log(e.target.value);
+  //   const checked = e.target.value
+  //   console.log(checked)
+  //   setIsCheck(!checked) 
+  //   setChosenPizza({...chosenPizza, [e.target.name]: isCheck})
   }
 
   return (
@@ -38,8 +47,8 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
             <option value="Large">Large</option>
           </select>
         </div>
-        <div className="col" onChange={handleChange} value={chosenPizza.vegetarian}>
-          <div className="form-check">
+        <div className="col">
+          <div className="form-check" onClick={handleCheck}>
             <input
               className="form-check-input"
               type="radio"
@@ -48,7 +57,7 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
-          <div className="form-check">
+          <div className="form-check" onClick={handleCheck}>
             <input
               className="form-check-input"
               type="radio"

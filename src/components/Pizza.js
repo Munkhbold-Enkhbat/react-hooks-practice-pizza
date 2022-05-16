@@ -8,7 +8,7 @@ function Pizza({ pizza, handleEdit }) {
     <tr>
       <td>{topping}</td>
       <td>{size}</td>
-      <td>{vegetarian}</td>
+      <td>{vegetarian ? 'Yes' : 'No'}</td>
       <td>
         <button type="button" id={id} className="btn btn-primary" onClick={handleEdit}>
           Edit Pizza
