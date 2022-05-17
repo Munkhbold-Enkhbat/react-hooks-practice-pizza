@@ -12,19 +12,10 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
       vegetarian: chosenPizza.vegetarian
     }
     console.log("Created pizza:", createdPizza);
-
   }
 
   const handleChange = (e) => {
     setChosenPizza({...chosenPizza, [e.target.name]: e.target.value})
-  }
-
-  const handleCheck = (e) => {
-    console.log(e.target);
-  //   const checked = e.target.value
-  //   console.log(checked)
-  //   setIsCheck(!checked) 
-  //   setChosenPizza({...chosenPizza, [e.target.name]: isCheck})
   }
 
   return (
@@ -48,21 +39,21 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
           </select>
         </div>
         <div className="col">
-          <div className="form-check" onClick={handleCheck}>
+          <div className="form-check">
             <input
               className="form-check-input"
               type="radio"
               name="vegetarian"
-              value={chosenPizza.vegetarian}
+              checked={chosenPizza.vegetarian ? true : false}
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
-          <div className="form-check" onClick={handleCheck}>
+          <div className="form-check">
             <input
               className="form-check-input"
               type="radio"
-              name="non-vegetarian"
-              value={chosenPizza.vegetarian}
+              name="vegetarian"
+              checked={chosenPizza.vegetarian ? false : true}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>

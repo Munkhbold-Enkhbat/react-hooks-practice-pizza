@@ -17,8 +17,8 @@ function App() {
       })
   }, [])
 
-  const handleEdit = (e) => {    
-    const foundPizza = pizzas.find(pizza => pizza.id === Number(e.target.id))
+  const handleEdit = (id) => {    
+    const foundPizza = pizzas.find(pizza => pizza.id === id)
     setChosenPizza(foundPizza)    
   }  
 
