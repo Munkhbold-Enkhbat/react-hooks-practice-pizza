@@ -20,7 +20,7 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
   }
 
   const handleCheck = (e) => {
-    console.log(e.target.value);
+    console.log(e.target);
   //   const checked = e.target.value
   //   console.log(checked)
   //   setIsCheck(!checked) 
@@ -61,7 +61,7 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
             <input
               className="form-check-input"
               type="radio"
-              name="vegetarian"
+              name="non-vegetarian"
               value={chosenPizza.vegetarian}
             />
             <label className="form-check-label">Not Vegetarian</label>

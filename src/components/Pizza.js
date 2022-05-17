@@ -1,9 +1,6 @@
 import React from "react";
 
-function Pizza({ pizza, handleEdit }) {
-
-  const { id, topping, size, vegetarian } = pizza
-
+function Pizza({ id, topping, size, vegetarian, handleEdit }) {
   return (
     <tr>
       <td>{topping}</td>

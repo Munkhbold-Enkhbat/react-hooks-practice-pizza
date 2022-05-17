@@ -11,9 +11,9 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:3001/pizzas")
       .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setPizzas(data)
+      .then(pizzaData => {
+        console.table(pizzaData);
+        setPizzas(pizzaData)
       })
   }, [])
 

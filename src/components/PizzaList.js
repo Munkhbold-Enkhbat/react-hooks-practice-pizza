@@ -5,7 +5,7 @@ function PizzaList({ pizzas, handleEdit }) {
 
   const renderPizzas = () => {
     return pizzas.map(pizza => {
-      return <Pizza key={pizza.id} pizza={pizza} handleEdit={handleEdit}/>
+      return <Pizza key={pizza.id} {...pizza} handleEdit={handleEdit}/>
     })
   }
   
