@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function PizzaForm({ chosenPizza, setChosenPizza }) {
 
@@ -15,7 +15,20 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
   }
 
   const handleChange = (e) => {
-    setChosenPizza({...chosenPizza, [e.target.name]: e.target.value})
+    setChosenPizza((prevPizza) => {
+      if(e.target.name === 'vegeratian') {
+        console.log(e.target.value)
+        return {
+          ...prevPizza, 
+          [e.target.name]: e.target.value === 'Vegetarian' ? true : false,
+        }
+      } else {
+        return {
+          ...prevPizza,
+          [e.target.name]: e.target.value
+        }
+      }
+    })
   }
 
   return (
@@ -44,7 +57,9 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
               className="form-check-input"
               type="radio"
               name="vegetarian"
+              value="Vegetarian"
               checked={chosenPizza.vegetarian ? true : false}
+              onChange={handleChange}
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
@@ -53,7 +68,9 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
               className="form-check-input"
               type="radio"
               name="vegetarian"
+              value="Not Vegetarian"
               checked={chosenPizza.vegetarian ? false : true}
+              onChange={handleChange}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>

@@ -12,7 +12,7 @@ function App() {
     fetch("http://localhost:3001/pizzas")
       .then(res => res.json())
       .then(pizzaData => {
-        console.table(pizzaData);
+        // console.table(pizzaData);
         setPizzas(pizzaData)
       })
   }, [])
