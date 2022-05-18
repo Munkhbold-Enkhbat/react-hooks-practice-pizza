@@ -1,35 +1,34 @@
 import React from "react";
 
-function PizzaForm({ chosenPizza, setChosenPizza }) {
-
-  // const [isCheck, setIsCheck] = useState(chosenPizza.vegetarian)
+function PizzaForm({ id, topping, size, vegetarian, setChosenPizza, handleCustomize }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const createdPizza = {
-      topping: chosenPizza.topping,
-      size: chosenPizza.size,
-      vegetarian: chosenPizza.vegetarian
-    }
-    console.log("Created pizza:", createdPizza);
+    fetch(`http://localhost:3001/pizzas/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        topping,
+        size,
+        vegetarian
+      })
+    }).then(res => res.json())
+      .then(pizzasData => handleCustomize(pizzasData))
+
   }
 
-  const handleChange = (e) => {
-    setChosenPizza((prevPizza) => {
-      if(e.target.name === 'vegeratian') {
-        console.log(e.target.value)
-        return {
-          ...prevPizza, 
-          [e.target.name]: e.target.value === 'Vegetarian' ? true : false,
-        }
-      } else {
-        return {
-          ...prevPizza,
-          [e.target.name]: e.target.value
-        }
-      }
-    })
-  }
+  const handleChange = e => setChosenPizza(prevPizza => {
+    return {
+      ...prevPizza, [e.target.name]: e.target.value
+    }
+  })
+  const handleCheck = e => setChosenPizza(prevPizza => {
+    return {
+      ...prevPizza, [e.target.name]: e.target.value === 'Vegetarian' ? true : false
+    }
+  })
 
   return (
     <form onSubmit={handleSubmit}>
@@ -40,12 +39,12 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
             type="text"
             name="topping"
             placeholder="Pizza Topping"
-            value={chosenPizza.topping}
+            value={topping}
             onChange={handleChange}
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size" onChange={handleChange} value={chosenPizza.size}>
+          <select className="form-control" name="size" onChange={handleChange} value={size}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -58,8 +57,8 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
               type="radio"
               name="vegetarian"
               value="Vegetarian"
-              checked={chosenPizza.vegetarian ? true : false}
-              onChange={handleChange}
+              onChange={handleCheck}
+              checked={vegetarian ? true : false}              
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
@@ -68,9 +67,9 @@ function PizzaForm({ chosenPizza, setChosenPizza }) {
               className="form-check-input"
               type="radio"
               name="vegetarian"
-              value="Not Vegetarian"
-              checked={chosenPizza.vegetarian ? false : true}
-              onChange={handleChange}
+              value="Not Vegetarian"              
+              onChange={handleCheck}
+              checked={vegetarian ? false : true}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>
