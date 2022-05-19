@@ -11,16 +11,14 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:3001/pizzas")
       .then(res => res.json())
-      .then(pizzaData => {        
-        setPizzas(pizzaData)
-      })
+      .then(setPizzas)
   }, [])
 
-  console.table(pizzas);
-
-  const handleEdit = (id) => {    
-    const foundPizza = pizzas.find(pizza => pizza.id === id)
-    setChosenPizza(foundPizza)    
+  const handleEdit = (name, value) => {     
+    setChosenPizza({
+      ...chosenPizza,
+      [name]: value
+    })
   }  
 
   const handleCustomize = (foundPizza) => {
@@ -28,13 +26,14 @@ function App() {
       return pizza.id === foundPizza.id ? foundPizza : pizza
     })
     setPizzas(updatedPizzas)
+    setChosenPizza(foundPizza)
   } 
 
   return (
     <>
       <Header />
-      <PizzaForm {...chosenPizza} setChosenPizza={setChosenPizza} handleCustomize={handleCustomize}/>
-      <PizzaList pizzas={pizzas} handleEdit={handleEdit}/>
+      <PizzaForm handleEdit={handleEdit} pizza={chosenPizza} handleCustomize={handleCustomize}/>
+      <PizzaList pizzas={pizzas} setChosenPizza={setChosenPizza}/>
     </>
   );
 }
